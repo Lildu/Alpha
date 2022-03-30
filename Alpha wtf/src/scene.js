@@ -14,19 +14,12 @@ class scene extends Phaser.Scene {
 
     create() {
 
-        this.zoom = 1;
-        this.cameras.main.setBounds(0, 0, this.width, this.height);
-        this.cameras.main.setZoom(1);
-
-        this.scrollspeed=0
-
-
 
 
 
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(2, 0.8);
+        backgroundImage.setScale(1, 0.8);
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('Alpha_test1', 'tiles');
@@ -38,24 +31,25 @@ class scene extends Phaser.Scene {
 
         this.player = new Player(this)
 
+        this.cameras.main.startFollow(this.player.player,false);
     }
 
 
     update() {
 
-        if ((this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor()) {
-            this.player.jump()
-            console.log("oui")
-        }
-        if (this.cursors.left.isDown) {
-            this.player.moveLeft()
-            this.scrollspeed=-3
-        } else if (this.cursors.right.isDown) {
-            this.player.moveRight()
-            this.scrollspeed=-3
-        } else {
-            this.player.stop();
-
+        switch (true) {
+            case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor():
+                this.player.jump()
+                console.log("oui")
+                break;
+            case this.cursors.left.isDown:
+                this.player.moveLeft()
+                break;
+            case this.cursors.right.isDown:
+                this.player.moveRight();
+                break;
+            default:
+                this.player.stop();
         }
 
 

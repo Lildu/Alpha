@@ -6,18 +6,8 @@ class Player {
         this.cameras=scene
         this.player = this.scene.physics.add.sprite(50, 300, 'player');
         this.player.setBounce(0.1);
-        this.player.setCollideWorldBounds(true);
+        this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platforms);
-
-        this.cameras.main.centerOn(this.player,this.player); //la caméra se centre sur le joueur
-        this.cameras.main.useBounds=true; //la caméra ne peut pas traverser la map
-
-
-
-
-
-
-
 
         this.scene.anims.create({
             key: 'walk',
@@ -45,17 +35,17 @@ class Player {
     }
 
     jump(){
-        this.player.setVelocityY(-350);
+        this.player.setVelocityY(-420);
         this.player.play('jump', true);
     }
     moveRight(){
-        this.player.setVelocityX(200);
+        this.player.setVelocityX(300);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
             this.player.play('walk', true)}
     }
     moveLeft(){
-        this.player.setVelocityX(-200);
+        this.player.setVelocityX(-300);
         if (this.player.body.onFloor()) {
             this.player.play('walk', true)}
         this.player.setFlipX(true);
