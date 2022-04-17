@@ -4,39 +4,43 @@ class Player {
     constructor(scene) {
         this.scene=scene
         this.cameras=scene
-        this.player = this.scene.physics.add.sprite(50, 300, 'player');
-        this.player.setBounce(0.1);
+        this.player = this.scene.physics.add.sprite(50, -300,"dude");
+        //this.player.setBounce(0.1);
+        this.player.setScale(1);
+
+
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platforms);
 
         this.scene.anims.create({
             key: 'walk',
-            frames: this.scene.anims.generateFrameNames('player', {
-                prefix: 'robo_player_',
-                start: 2,
-                end: 3,
-            }),
-            frameRate: 10,
-            repeat: -1
+            frames: this.scene.anims.generateFrameNumbers('walk', {start: 0, end: 119}),
+            frameRate: 60,
+            flipX: true,
+            repeat: 1,
+
         });
+
         this.scene.anims.create({
             key: 'idle',
-            frames: [{key: 'player', frame: 'robo_player_0'}],
-            frameRate: 10,
+            frames: this.scene.anims.generateFrameNumbers('idle', {start: 0, end: 119}),
+            frameRate: 60,
+            flipX: true,
+            repeat: -1
 
         });
         this.scene.anims.create({
             key: 'jump',
-            frames: [{key: 'player', frame: 'robo_player_1'}],
-            frameRate: 10,
+            frames: this.scene.anims.generateFrameNumbers('walk', {start: 0, end: 119}),
+            frameRate: 60,
             repeat:-1,
-
         });
     }
 
     jump(){
         this.player.setVelocityY(-420);
         this.player.play('jump', true);
+
     }
     moveRight(){
         this.player.setVelocityX(300);

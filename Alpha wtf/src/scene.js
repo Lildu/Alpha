@@ -7,6 +7,17 @@ class scene extends Phaser.Scene {
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
 
+        this.load.image('dude', 'assets/images/dude.png');
+
+
+        this.load.spritesheet('walk', 'assets/images/tilesheet/tilesheet-walk.png',{ frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('idle', 'assets/images/tilesheet/tilesheet-idle.png',{ frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('shield', 'assets/images/tilesheet/tilesheet-shield.png',{ frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('sword', 'assets/images/tilesheet/tilesheet-sword2.png',{ frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('up', 'assets/images/tilesheet/tilesheet-gun-up.png',{ frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('midle', 'assets/images/tilesheet/tilesheet-gun-midle.png',{ frameWidth: 512, frameHeight: 512 });
+        this.load.spritesheet('down', 'assets/images/tilesheet/tilesheet-gun-down.png',{ frameWidth: 512, frameHeight: 512 });
+
         // Load the export Tiled JSON
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/Alpha1.json');
     }
@@ -48,6 +59,7 @@ class scene extends Phaser.Scene {
             case this.cursors.right.isDown:
                 this.player.moveRight();
                 break;
+            case this.cursors.
             default:
                 this.player.stop();
         }
