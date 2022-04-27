@@ -59,14 +59,9 @@ class scene extends Phaser.Scene {
             case this.cursors.right.isDown:
                 this.player.moveRight();
                 break;
-            case this.cursors.
+
             default:
                 this.player.stop();
         }
-
-
-
-
-
     }
 }
