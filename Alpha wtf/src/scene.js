@@ -40,18 +40,46 @@ class scene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
 
-        this.player = new Player(this)
 
+        this.initKeyboard();
         this.cameras.main.startFollow(this.player.player,false);
     }
 
+    initKeyboard(){
+        this.player = new Player(this)
+        let me=this;
+        this.input.keyboard.on('keydown', function(kevent)
+        {
+            switch (kevent.keyCode)
+            {
+                case Phaser.Input.Keyboard.KeyCodes.E:
+                    console.log("oui")
+                    me.player.gravitystop();
+                    break;
+
+                case Phaser.Input.Keyboard.KeyCodes.A:
+                    console.log("oui")
+                    me.player.gravitynorm();
+                    break;
+
+            }
+        });
+        this.input.keyboard.on('keyup', function(kevent)
+        {
+            switch (kevent.keyCode){
+
+            }
+
+
+        });
+    }
 
     update() {
 
         switch (true) {
             case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor():
                 this.player.jump()
-                console.log("oui")
+
                 break;
             case this.cursors.left.isDown:
                 this.player.moveLeft()

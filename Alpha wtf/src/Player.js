@@ -2,6 +2,7 @@ class Player {
 
 
     constructor(scene) {
+
         this.scene=scene
         this.cameras=scene
         this.player = this.scene.physics.add.sprite(50, -300,"dude");
@@ -59,6 +60,14 @@ class Player {
         if (this.player.body.onFloor()) {
             this.player.play('idle',true)
         }
+    }
+
+    gravitystop(){
+
+        this.player.setGravityY(0);
+    }
+    gravitynorm(){
+        this.player.setGravityY(500);
     }
 
     }
