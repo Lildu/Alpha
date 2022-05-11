@@ -8,6 +8,7 @@ class scene extends Phaser.Scene {
         this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
 
         this.load.image('dude', 'assets/images/dude.png');
+        this.load.image('square', 'assets/images/square.png');
 
 
         this.load.spritesheet('walk', 'assets/images/tilesheet/tilesheet-walk.png',{ frameWidth: 512, frameHeight: 512 });
@@ -28,7 +29,6 @@ class scene extends Phaser.Scene {
 
 
 
-
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1, 0.8);
         const map = this.make.tilemap({key: 'map'});
@@ -39,6 +39,8 @@ class scene extends Phaser.Scene {
         this.platforms.setCollisionByExclusion(-1, true);
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        
+
 
 
         this.initKeyboard();
@@ -46,6 +48,7 @@ class scene extends Phaser.Scene {
     }
 
     initKeyboard(){
+
         this.player = new Player(this)
         let me=this;
         this.input.keyboard.on('keydown', function(kevent)
@@ -61,13 +64,22 @@ class scene extends Phaser.Scene {
                     console.log("oui")
                     me.player.gravitynorm();
                     break;
+                case Phaser.Input.Keyboard.KeyCodes.NUMPAD_SIX:
+                    console.log("oui")
+                    me.player.tir(1);
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.NUMPAD_FOUR:
+                    console.log("oui")
+                    me.player.tir(-1);
+                    break;
+
+
 
             }
         });
         this.input.keyboard.on('keyup', function(kevent)
         {
             switch (kevent.keyCode){
-
             }
 
 
@@ -79,14 +91,27 @@ class scene extends Phaser.Scene {
         switch (true) {
             case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor():
                 this.player.jump()
-
                 break;
             case this.cursors.left.isDown:
-                this.player.moveLeft()
+
+                if(this.cursors.left.shiftKey){
+                    this.player.moveLeft(600);
+                    break;
+                }
+                else{
+                    this.player.moveLeft(300);
+                }
                 break;
             case this.cursors.right.isDown:
-                this.player.moveRight();
+                if(this.cursors.right.shiftKey){
+                    this.player.moveRight(600);
+                    break;
+                }
+                else{
+                    this.player.moveRight(300);
+                }
                 break;
+
 
             default:
                 this.player.stop();
